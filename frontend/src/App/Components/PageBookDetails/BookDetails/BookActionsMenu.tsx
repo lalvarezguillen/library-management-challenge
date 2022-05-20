@@ -10,12 +10,13 @@ import {
 
 interface Props {
   onEdit: () => void;
+  checkButtonText: string;
   onCheck: () => void;
   onDelete: () => void;
 }
 
 const BookActionsMenu = (props: Props) => {
-  const { onEdit, onCheck, onDelete } = props;
+  const { onEdit, checkButtonText, onCheck, onDelete } = props;
   const popupState = usePopupState({ variant: 'popover', popupId: 'demoMenu' })
 
   const checkBook = () => {
@@ -34,7 +35,7 @@ const BookActionsMenu = (props: Props) => {
         Actions
       </Button>
       <Menu {...bindMenu(popupState)}>
-        <MenuItem onClick={checkBook}>Check In</MenuItem>
+        <MenuItem onClick={checkBook}>{checkButtonText}</MenuItem>
         <MenuItem onClick={onEdit}>Edit</MenuItem>
         <MenuItem onClick={deleteBook}>Delete</MenuItem>
       </Menu>

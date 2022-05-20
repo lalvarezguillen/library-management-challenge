@@ -1,5 +1,5 @@
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { BookActivity } from '../../types';
+import { BookActivity } from '../../../types';
 
 const pageSize = 5;
 

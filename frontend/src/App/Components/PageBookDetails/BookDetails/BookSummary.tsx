@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material';
-import { Book } from '../../types';
+import { Book } from '../../../types';
 
 
 const BookSummary = (params: Book) => {

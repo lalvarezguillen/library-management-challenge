@@ -2,7 +2,7 @@ import { Formik, Form, Field, FormikHelpers } from 'formik';
 import { TextField } from 'formik-mui';
 
 import Grid from '@mui/material/Grid';
-import { Button, LinearProgress, Alert, Typography } from '@mui/material';
+import { Button, LinearProgress, Typography } from '@mui/material';
 
 import { BookWritable } from '../../types';
 
@@ -140,9 +140,3 @@ const StyledField = styled(Field)`
     width: 100%;
   }
 `;
-
-const Feeback = styled(Alert)`
-  && {
-    margin-top: 5px;
-  }
-`
