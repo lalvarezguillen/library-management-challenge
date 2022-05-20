@@ -42,7 +42,7 @@ export default function BasicModal(props: Props) {
 
           <Grid item container xs={6}>
             <Button
-              color="primary"
+              color="secondary"
               variant="contained"
               onClick={onCancel}
             >
@@ -52,7 +52,7 @@ export default function BasicModal(props: Props) {
 
           <Grid item container xs={6} justifyContent="end">
             <Button
-              color="warning"
+              color="primary"
               variant="contained"
               onClick={onConfirm}
             >

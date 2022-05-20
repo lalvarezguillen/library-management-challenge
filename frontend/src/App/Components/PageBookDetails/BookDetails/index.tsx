@@ -54,7 +54,7 @@ const BookDetails = (props: Props) => {
   }
 
   useEffect(() => {
-    book.pk && getActivityPage(book.pk, 1);
+    if (book.pk) getActivityPage(book.pk, 1);
   }, [book]);
 
   return (
@@ -63,7 +63,7 @@ const BookDetails = (props: Props) => {
         <Grid container rowSpacing={4}>
           <Grid item xs={6}>
             <Button
-              color="primary"
+              color="secondary"
               variant="contained"
               onClick={() => navigate('/')}
             >

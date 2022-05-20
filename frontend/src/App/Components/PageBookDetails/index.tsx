@@ -12,6 +12,7 @@ const nullBook = {
   title: '',
   author: '',
   description: '',
+  // TODO: consistent casing
   on_site: true,
 };
 
@@ -34,7 +35,7 @@ const PageBookDetails = () => {
   }
 
   useEffect(() => {
-    bookId && getBook(bookId);
+    if (bookId) getBook(bookId);
   }, [bookId]);
 
   const handleEditSuccess = (book: Book) => {

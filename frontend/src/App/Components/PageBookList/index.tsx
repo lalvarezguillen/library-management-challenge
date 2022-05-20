@@ -24,7 +24,7 @@ const BooksList = () => {
   }, [page])
 
   return (
-    <Grid container rowSpacing={2}>
+    <Grid container rowSpacing={4}>
       <Grid item xs={10}></Grid>
       <Grid item container justifyContent="end" xs={2}>
         <Button

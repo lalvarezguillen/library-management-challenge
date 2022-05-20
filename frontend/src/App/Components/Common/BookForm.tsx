@@ -53,7 +53,7 @@ export const BookForm = (params: Params) => {
                     <Grid item xs={3}>
                       <Button
                         variant="contained"
-                        color="primary"
+                        color="secondary"
                         disabled={isSubmitting}
                         onClick={onCancel}
                       >
