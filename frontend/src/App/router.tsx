@@ -1,7 +1,7 @@
-import { Routes, Route } from 'react-router-dom';
-import BookCreate from './Components/PageBookCreate'
-import BookDetails from './Components/PageBookDetails';
-import BooksList from './Components/PageBookList';
+import { Routes, Route } from "react-router-dom";
+import BookCreate from "./Components/PageBookCreate";
+import BookDetails from "./Components/PageBookDetails";
+import BooksList from "./Components/PageBookList";
 
 const Router = () => {
   return (

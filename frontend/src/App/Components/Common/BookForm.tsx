@@ -1,12 +1,12 @@
-import { Formik, Form, Field, FormikHelpers } from 'formik';
-import { TextField } from 'formik-mui';
+import { Formik, Form, Field, FormikHelpers } from "formik";
+import { TextField } from "formik-mui";
 
-import Grid from '@mui/material/Grid';
-import { Button, LinearProgress, Typography } from '@mui/material';
+import Grid from "@mui/material/Grid";
+import { Button, LinearProgress, Typography } from "@mui/material";
 
-import { BookWritable } from '../../types';
+import { BookWritable } from "../../types";
 
-import { styled } from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
 
 export interface BookErrors {
   isbn?: string[];
@@ -17,7 +17,7 @@ export interface BookErrors {
    * Django Rest Framwork provides this error field
    * when the error is not tied to a particular field.
    * It's snake-cased from the backend, hence the
-   * inconsistent casing. 
+   * inconsistent casing.
    */
   non_field_errors?: string[];
 }
@@ -25,7 +25,10 @@ export interface BookErrors {
 interface Params {
   values: BookWritable;
   buttonText: string;
-  onSubmit: ((values: BookWritable, formikHelpers: FormikHelpers<BookWritable>) => void | Promise<any>);
+  onSubmit: (
+    values: BookWritable,
+    formikHelpers: FormikHelpers<BookWritable>
+  ) => void | Promise<any>;
   onCancel: () => void;
   errors?: BookErrors;
   disabled?: Boolean;
@@ -42,39 +45,36 @@ export const BookForm = (params: Params) => {
       {({ submitForm, isSubmitting }) => (
         <Form>
           <Grid container direction="column" spacing={2}>
-
-            {
-              !disabled && (
-                <Grid item>
-                  <Grid container>
-                    <Grid item xs={12}>
-                      {isSubmitting && <LinearProgress />}
-                    </Grid>
-                    <Grid item xs={3}>
-                      <Button
-                        variant="contained"
-                        color="secondary"
-                        disabled={isSubmitting}
-                        onClick={onCancel}
-                      >
-                        Back
-                      </Button>
-                    </Grid>
-                    <Grid item xs={6}></Grid>
-                    <Grid item container xs={3} direction="row-reverse">
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        disabled={isSubmitting}
-                        onClick={submitForm}
-                      >
-                        {buttonText}
-                      </Button>
-                    </Grid>
+            {!disabled && (
+              <Grid item>
+                <Grid container>
+                  <Grid item xs={12}>
+                    {isSubmitting && <LinearProgress />}
+                  </Grid>
+                  <Grid item xs={3}>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      disabled={isSubmitting}
+                      onClick={onCancel}
+                    >
+                      Back
+                    </Button>
+                  </Grid>
+                  <Grid item xs={6}></Grid>
+                  <Grid item container xs={3} direction="row-reverse">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      disabled={isSubmitting}
+                      onClick={submitForm}
+                    >
+                      {buttonText}
+                    </Button>
                   </Grid>
                 </Grid>
-              )
-            }
+              </Grid>
+            )}
 
             <Grid item>
               <StyledField
@@ -89,7 +89,8 @@ export const BookForm = (params: Params) => {
             </Grid>
 
             <Grid item>
-              <StyledField component={TextField}
+              <StyledField
+                component={TextField}
                 name="title"
                 type="text"
                 label="Title"
@@ -126,14 +127,16 @@ export const BookForm = (params: Params) => {
             </Grid>
 
             <Grid item>
-              {errors?.non_field_errors && <Typography color="error">{errors.non_field_errors}</Typography>}
+              {errors?.non_field_errors && (
+                <Typography color="error">{errors.non_field_errors}</Typography>
+              )}
             </Grid>
           </Grid>
         </Form>
       )}
     </Formik>
-  )
-}
+  );
+};
 
 const StyledField = styled(Field)`
   && {

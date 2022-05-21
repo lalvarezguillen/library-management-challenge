@@ -4,7 +4,6 @@ import { useFetchBook, useUpdateBook } from "../../../services";
 import { BookWritable } from "../../../types";
 import { BookForm } from "../../Common/BookForm";
 
-
 interface Props {
   bookId: number;
   onSuccess: () => void;
@@ -19,16 +18,15 @@ const BookEdit = (props: Props) => {
 
   const handleOnSubmit = async (
     updatedBook: BookWritable,
-    { setSubmitting }: FormikHelpers<any>,
+    { setSubmitting }: FormikHelpers<any>
   ) => {
     setSubmitting(true);
-    mutation.mutate(updatedBook)
+    mutation.mutate(updatedBook);
     setSubmitting(false);
-
-  }
+  };
 
   if (mutation.isSuccess) {
-    onSuccess()
+    onSuccess();
   }
 
   return (
@@ -42,7 +40,8 @@ const BookEdit = (props: Props) => {
           ? mutation.error?.response?.data
           : {}
       }
-    />)
-}
+    />
+  );
+};
 
-export default BookEdit
+export default BookEdit;

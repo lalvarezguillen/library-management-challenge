@@ -1,6 +1,6 @@
-import { Grid, Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import BooksTable from './BooksTable';
+import { Grid, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import BooksTable from "./BooksTable";
 
 const BooksList = () => {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ const BooksList = () => {
         <Button
           color="primary"
           variant="contained"
-          onClick={() => navigate('/new')}
+          onClick={() => navigate("/new")}
         >
           Add Book
         </Button>

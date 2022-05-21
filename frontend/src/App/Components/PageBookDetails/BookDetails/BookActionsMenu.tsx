@@ -1,12 +1,12 @@
-import * as React from 'react'
-import Button from '@mui/material/Button'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
+import * as React from "react";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import {
   usePopupState,
   bindTrigger,
   bindMenu,
-} from 'material-ui-popup-state/hooks'
+} from "material-ui-popup-state/hooks";
 
 interface Props {
   onEdit: () => void;
@@ -17,17 +17,17 @@ interface Props {
 
 const BookActionsMenu = (props: Props) => {
   const { onEdit, checkButtonText, onCheck, onDelete } = props;
-  const popupState = usePopupState({ variant: 'popover', popupId: 'demoMenu' })
+  const popupState = usePopupState({ variant: "popover", popupId: "demoMenu" });
 
   const checkBook = () => {
     popupState.close();
     onCheck();
-  }
+  };
 
   const deleteBook = () => {
     popupState.close();
     onDelete();
-  }
+  };
 
   return (
     <div>
@@ -40,7 +40,7 @@ const BookActionsMenu = (props: Props) => {
         <MenuItem onClick={deleteBook}>Delete</MenuItem>
       </Menu>
     </div>
-  )
-}
+  );
+};
 
 export default BookActionsMenu;

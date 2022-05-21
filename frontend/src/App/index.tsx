@@ -1,8 +1,8 @@
-import { styled } from '@mui/material/styles';
-import Container from '@mui/material/Container';
+import { styled } from "@mui/material/styles";
+import Container from "@mui/material/Container";
 import { QueryClientProvider } from "react-query";
-import Router from './router';
-import { queryClient } from './services';
+import Router from "./router";
+import { queryClient } from "./services";
 
 const ContainerStyled = styled(Container)`
   && {

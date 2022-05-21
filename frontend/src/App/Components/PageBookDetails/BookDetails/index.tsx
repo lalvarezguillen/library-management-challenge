@@ -1,12 +1,16 @@
-import { Button, Grid } from '@mui/material';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useCheckBookIn, useCheckOutBook, useDeleteBook, useFetchBook } from '../../../services';
-import ActivityTable from './ActivityTable';
-import BookSummary from './BookSummary';
-import BookActionsMenu from './BookActionsMenu';
-import ConfirmDeletionModal from './ConfirmDeletionModal';
-
+import { Button, Grid } from "@mui/material";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  useCheckBookIn,
+  useCheckOutBook,
+  useDeleteBook,
+  useFetchBook,
+} from "../../../services";
+import ActivityTable from "./ActivityTable";
+import BookSummary from "./BookSummary";
+import BookActionsMenu from "./BookActionsMenu";
+import ConfirmDeletionModal from "./ConfirmDeletionModal";
 
 interface Props {
   bookId: number;
@@ -15,21 +19,20 @@ interface Props {
 
 const BookDetails = (props: Props) => {
   const { bookId, handleEdit } = props;
-  const { data: book } = useFetchBook(bookId)
+  const { data: book } = useFetchBook(bookId);
 
   const navigate = useNavigate();
 
   const checkInBook = useCheckBookIn(bookId);
   const checkOutBook = useCheckOutBook(bookId);
-  const deleteBook = useDeleteBook(bookId)
-
+  const deleteBook = useDeleteBook(bookId);
 
   const [modalIsOpen, setModalisOpen] = useState(false);
   const handleDeleteBook = async () => {
     deleteBook.mutate();
     setModalisOpen(false);
-    navigate('/')
-  }
+    navigate("/");
+  };
 
   return (
     <Grid container>
@@ -39,7 +42,7 @@ const BookDetails = (props: Props) => {
             <Button
               color="secondary"
               variant="contained"
-              onClick={() => navigate('/')}
+              onClick={() => navigate("/")}
             >
               Back
             </Button>
@@ -55,9 +58,7 @@ const BookDetails = (props: Props) => {
           </Grid>
 
           <Grid item container xs={12}>
-            <BookSummary
-              {...book}
-            />
+            <BookSummary {...book} />
           </Grid>
 
           <Grid item xs={12}>
