@@ -7,8 +7,7 @@ import Navbar from "./Components/Navbar";
 
 const ContainerStyled = styled(Container)`
   && {
-    padding-top: 10px;
-    margin-top: 100px;
+    margin-top: 80px;
   }
 `;
 function App() {
