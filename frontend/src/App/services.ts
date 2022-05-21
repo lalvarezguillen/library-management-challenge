@@ -54,7 +54,7 @@ export const useUpdateBook = (bookId: number) => {
 
 export const useCheckBookIn = (bookId: number) => {
   return useMutation(() => checkBookIn(bookId), {
-    onSuccess: (updatedBook) => {
+    onSuccess: () => {
       queryClient.invalidateQueries(["books"]);
       queryClient.invalidateQueries(["book", bookId]);
       queryClient.invalidateQueries(["book-activity", bookId]);

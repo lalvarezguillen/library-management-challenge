@@ -1,4 +1,5 @@
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
+import CheckIcon from '@mui/icons-material/Check';
 import { useFetchBooks } from "../../services";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -29,6 +30,9 @@ const columns: GridColDef[] = [
     field: "on_site",
     headerName: "Available",
     flex: 1,
+    renderCell: (params: GridValueGetterParams) => (
+      params.row.on_site ? <CheckIcon /> : <></>
+    )
   },
 ];
 
