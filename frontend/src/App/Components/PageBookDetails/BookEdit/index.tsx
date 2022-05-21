@@ -1,38 +1,34 @@
 import { AxiosError } from "axios";
 import { FormikHelpers } from "formik";
-import { useState } from "react";
-import { updateBook } from "../../../api";
-import { Book, BookWritable } from "../../../types";
+import { useFetchBook, useUpdateBook } from "../../../services";
+import { BookWritable } from "../../../types";
 import { BookForm } from "../../Common/BookForm";
 
 
 interface Props {
-  book: Book;
-  onSuccess: (b: Book) => void;
+  bookId: number;
+  onSuccess: () => void;
   onCancel: () => void;
 }
 
 const BookEdit = (props: Props) => {
-  const { book, onSuccess, onCancel } = props;
+  const { bookId, onCancel, onSuccess } = props;
 
-  const [errors, setErrors] = useState({});
+  const { data: book } = useFetchBook(bookId);
+  const mutation = useUpdateBook(bookId);
 
   const handleOnSubmit = async (
-    values: BookWritable,
+    updatedBook: BookWritable,
     { setSubmitting }: FormikHelpers<any>,
   ) => {
     setSubmitting(true);
-
-    try {
-      setErrors({})
-      const resp = await updateBook(book.pk, values);
-      onSuccess(resp.data);
-    } catch (e) {
-      if (e instanceof AxiosError) {
-        setErrors(e.response?.data);
-      }
-    }
+    mutation.mutate(updatedBook)
     setSubmitting(false);
+
+  }
+
+  if (mutation.isSuccess) {
+    onSuccess()
   }
 
   return (
@@ -41,7 +37,11 @@ const BookEdit = (props: Props) => {
       onCancel={onCancel}
       values={book}
       buttonText="Save Changes"
-      errors={errors}
+      errors={
+        mutation.error instanceof AxiosError
+          ? mutation.error?.response?.data
+          : {}
+      }
     />)
 }
 

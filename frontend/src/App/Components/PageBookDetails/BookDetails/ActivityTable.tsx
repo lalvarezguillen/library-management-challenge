@@ -1,5 +1,6 @@
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { BookActivity } from '../../../types';
+import { useState } from 'react';
+import { useFetchActivity } from '../../../services';
 
 const pageSize = 5;
 
@@ -18,28 +19,36 @@ const columns: GridColDef[] = [
 
 
 interface Params {
-  activity: BookActivity[];
-  totalItems: number;
-  page: number;
-  onPageChange: (pageNum: number) => void;
+  bookId: number;
 }
 
 
 const ActivityTable = (params: Params) => {
-  const { activity, totalItems, onPageChange } = params;
+  const { bookId } = params;
+  const [page, setPage] = useState(1);
+  const { data, error, isLoading } = useFetchActivity(bookId, page);
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+
+  if (error) {
+    return <div>Failed to fetch book activity list</div>
+  }
+
   return (
     <div style={{ height: 400, width: '100%' }}>
       <DataGrid
-        rows={activity}
+        rows={data.results}
         columns={columns}
         pageSize={pageSize}
         rowsPerPageOptions={[pageSize]}
         getRowId={(el) => el.pk}
         paginationMode={'server'}
-        rowCount={totalItems}
+        rowCount={data.count}
         // Pages are zero-indexed by this DataGrid, but
         // they're 1-indexed by the API
-        onPageChange={(n) => onPageChange(n + 1)}
+        onPageChange={(n) => setPage(n + 1)}
       />
     </div>
   );

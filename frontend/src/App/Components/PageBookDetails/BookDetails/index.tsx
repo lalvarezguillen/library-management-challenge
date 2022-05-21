@@ -1,8 +1,7 @@
 import { Button, Grid } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { checkBookIn, checkBookOut, deleteBook, fetchBookActivity } from '../../../api';
-import { Book } from '../../../types';
+import { useCheckBookIn, useCheckOutBook, useDeleteBook, useFetchBook } from '../../../services';
 import ActivityTable from './ActivityTable';
 import BookSummary from './BookSummary';
 import BookActionsMenu from './BookActionsMenu';
@@ -10,52 +9,27 @@ import ConfirmDeletionModal from './ConfirmDeletionModal';
 
 
 interface Props {
-  book: Book;
+  bookId: number;
   handleEdit: () => void;
-  afterCheckOut: (b: Book) => void;
-  afterDelete: () => void;
 }
 
 const BookDetails = (props: Props) => {
-  const { book, afterCheckOut, afterDelete, handleEdit } = props;
+  const { bookId, handleEdit } = props;
+  const { data: book } = useFetchBook(bookId)
+
   const navigate = useNavigate();
 
-  const [activity, setActivity] = useState([]);
-  const [totalItems, setTotalItems] = useState(book.pk);
-  const [page, setPage] = useState(1)
-
-  const getActivityPage = async (bookId: number, page: number) => {
-    const params = {
-      page: page,
-    };
-    const resp = await fetchBookActivity(bookId, params);
-    setActivity(resp.data.results);
-    setTotalItems(resp.data.count);
-    setPage(page);
-  }
-
-  const checkBook = async () => {
-    const resp = book.on_site
-      ? await checkBookOut(book.pk)
-      : await checkBookIn(book.pk);
-
-    afterCheckOut(resp.data);
-
-    await getActivityPage(book.pk, 1);
-  }
+  const checkInBook = useCheckBookIn(bookId);
+  const checkOutBook = useCheckOutBook(bookId);
+  const deleteBook = useDeleteBook(bookId)
 
 
   const [modalIsOpen, setModalisOpen] = useState(false);
   const handleDeleteBook = async () => {
-    await deleteBook(book.pk);
+    deleteBook.mutate();
     setModalisOpen(false);
-    afterDelete();
     navigate('/')
   }
-
-  useEffect(() => {
-    if (book.pk) getActivityPage(book.pk, 1);
-  }, [book]);
 
   return (
     <Grid container>
@@ -73,8 +47,8 @@ const BookDetails = (props: Props) => {
 
           <Grid item container justifyContent="end" xs={6}>
             <BookActionsMenu
-              checkButtonText={book.on_site ? "Check Out" : "Check In"}
-              onCheck={checkBook}
+              checkButtonText={book?.on_site ? "Check Out" : "Check In"}
+              onCheck={book?.on_site ? checkOutBook.mutate : checkInBook.mutate}
               onDelete={() => setModalisOpen(true)}
               onEdit={() => handleEdit()}
             />
@@ -87,12 +61,7 @@ const BookDetails = (props: Props) => {
           </Grid>
 
           <Grid item xs={12}>
-            <ActivityTable
-              activity={activity}
-              totalItems={totalItems}
-              page={page}
-              onPageChange={(pageNum) => getActivityPage(book.pk, pageNum)}
-            />
+            <ActivityTable bookId={bookId} />
           </Grid>
           <ConfirmDeletionModal
             isOpen={modalIsOpen}

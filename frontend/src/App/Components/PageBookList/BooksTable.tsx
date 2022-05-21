@@ -1,6 +1,7 @@
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import Link from '@mui/material/Link';
-import { Book } from '../../types';
+import { useFetchBooks } from '../../services';
+import { useState } from 'react';
 
 const pageSize = 5;
 
@@ -33,14 +34,23 @@ const columns: GridColDef[] = [
   }
 ];
 
-interface Params {
-  books: Book[];
-  totalItems: number;
-  onPageChange: (pageNum: number) => void;
-}
 
-const BooksTable = (params: Params) => {
-  const { books, totalItems, onPageChange } = params;
+const BooksTable = () => {
+
+  const [page, setPage] = useState(1);
+  const { data, error, isLoading } = useFetchBooks(page);
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+
+  if (error) {
+    return <div>There was a problem fetching the books list</div>
+  }
+
+  const books = data.results || [];
+  const booksCount = data.count || 0;
+
   return (
     <div style={{ height: 400, width: '100%' }}>
       <DataGrid
@@ -50,10 +60,10 @@ const BooksTable = (params: Params) => {
         rowsPerPageOptions={[pageSize]}
         getRowId={el => el.pk}
         paginationMode={'server'}
-        rowCount={totalItems}
+        rowCount={booksCount}
         // DataGrid indexes the pages zero-based.
         // But the API indexes them 1-based
-        onPageChange={(p) => onPageChange(p + 1)}
+        onPageChange={(p) => setPage(p + 1)}
       />
     </div>
   );

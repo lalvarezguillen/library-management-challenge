@@ -1,6 +1,8 @@
 import { styled } from '@mui/material/styles';
 import Container from '@mui/material/Container';
+import { QueryClientProvider } from "react-query";
 import Router from './router';
+import { queryClient } from './services';
 
 const ContainerStyled = styled(Container)`
   && {
@@ -11,9 +13,11 @@ const ContainerStyled = styled(Container)`
 function App() {
   return (
     <div className="App">
-      <ContainerStyled maxWidth="md">
-        <Router />
-      </ContainerStyled>
+      <QueryClientProvider client={queryClient}>
+        <ContainerStyled maxWidth="md">
+          <Router />
+        </ContainerStyled>
+      </QueryClientProvider>
     </div>
   );
 }
