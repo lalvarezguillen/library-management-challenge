@@ -14,7 +14,7 @@ const BookEdit = (props: Props) => {
   const { bookId, onCancel, onSuccess } = props;
 
   const { data: book } = useFetchBook(bookId);
-  const mutation = useUpdateBook(bookId);
+  const mutation = useUpdateBook(bookId, onSuccess);
 
   const handleOnSubmit = async (
     updatedBook: BookWritable,
@@ -24,10 +24,6 @@ const BookEdit = (props: Props) => {
     mutation.mutate(updatedBook);
     setSubmitting(false);
   };
-
-  if (mutation.isSuccess) {
-    onSuccess();
-  }
 
   return (
     <BookForm

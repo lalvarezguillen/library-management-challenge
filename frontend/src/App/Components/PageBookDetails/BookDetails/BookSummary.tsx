@@ -4,7 +4,7 @@ import { Book } from "../../../types";
 const BookSummary = (params: Book) => {
   const { isbn, title, author, description } = params;
   return (
-    <div>
+    <div style={{ maxWidth: '100%', wordBreak: 'break-word' }}>
       <Typography variant="h2">{title}</Typography>
       <p>by {author}</p>
       <p>ISBN {isbn}</p>

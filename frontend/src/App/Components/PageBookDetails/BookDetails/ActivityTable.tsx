@@ -1,4 +1,4 @@
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import { useState } from "react";
 import { useFetchActivity } from "../../../services";
 
@@ -9,6 +9,9 @@ const columns: GridColDef[] = [
     field: "created_at",
     headerName: "Timestamp",
     flex: 1,
+    renderCell: (params: GridValueGetterParams) => (
+      formatDate(params.row.created_at)
+    ),
   },
   {
     field: "type",
@@ -53,3 +56,9 @@ const ActivityTable = (params: Params) => {
 };
 
 export default ActivityTable;
+
+
+const formatDate = (raw: string) => {
+  const d = new Date(raw);
+  return d.toLocaleString();
+}

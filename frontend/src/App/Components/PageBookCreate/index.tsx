@@ -15,7 +15,11 @@ const intialValues = {
 
 const BookCreate = () => {
   const navigate = useNavigate();
-  const mutation = useCreateBook();
+
+  const mutation = useCreateBook(({ pk }) => {
+    const bookUrl = `/${pk}`;
+    navigate(bookUrl);
+  });
 
   const handleOnSubmit = async (
     book: BookWritable,
@@ -26,10 +30,6 @@ const BookCreate = () => {
     setSubmitting(false);
   };
 
-  if (mutation.isSuccess) {
-    const bookUrl = `/${mutation.data.pk}`;
-    navigate(bookUrl);
-  }
 
   return (
     <Grid container>

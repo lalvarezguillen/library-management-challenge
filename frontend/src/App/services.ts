@@ -35,19 +35,21 @@ export const useFetchActivity = (id: number, page: number = 1) => {
   );
 };
 
-export const useCreateBook = () => {
+export const useCreateBook = (onSuccess: (data: { pk: string }) => void) => {
   return useMutation((book: BookWritable) => createBook(book), {
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries(["books"]);
+      onSuccess(data);
     },
   });
 };
 
-export const useUpdateBook = (bookId: number) => {
+export const useUpdateBook = (bookId: number, onSuccess: () => void) => {
   return useMutation((book: BookWritable) => updateBook(bookId, book), {
     onSuccess: () => {
       queryClient.invalidateQueries(["books"]);
       queryClient.invalidateQueries(["book", bookId]);
+      onSuccess();
     },
   });
 };

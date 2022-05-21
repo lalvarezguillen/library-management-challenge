@@ -29,7 +29,7 @@ const columns: GridColDef[] = [
   {
     field: "on_site",
     headerName: "Available",
-    flex: 1,
+    flex: 1.5,
     renderCell: (params: GridValueGetterParams) => (
       params.row.on_site ? <CheckIcon /> : <></>
     )
