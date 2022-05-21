@@ -1,7 +1,7 @@
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import Link from '@mui/material/Link';
 import { useFetchBooks } from '../../services';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const pageSize = 5;
 
@@ -11,7 +11,7 @@ const columns: GridColDef[] = [
     headerName: 'ID',
     flex: 1,
     renderCell: (params: GridValueGetterParams) => (
-      <Link href={`/${params.row.pk}`}>
+      <Link to={`/${params.row.pk}`}>
         {params.row.pk}
       </Link>
     ),
