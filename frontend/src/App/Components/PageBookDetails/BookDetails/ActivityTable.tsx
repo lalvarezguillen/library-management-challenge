@@ -9,9 +9,8 @@ const columns: GridColDef[] = [
     field: "created_at",
     headerName: "Timestamp",
     flex: 1,
-    renderCell: (params: GridValueGetterParams) => (
-      formatDate(params.row.created_at)
-    ),
+    renderCell: (params: GridValueGetterParams) =>
+      formatDate(params.row.created_at),
   },
   {
     field: "type",
@@ -57,8 +56,7 @@ const ActivityTable = (params: Params) => {
 
 export default ActivityTable;
 
-
 const formatDate = (raw: string) => {
   const d = new Date(raw);
   return d.toLocaleString();
-}
+};

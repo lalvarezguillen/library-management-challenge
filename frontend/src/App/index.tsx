@@ -10,6 +10,7 @@ const ContainerStyled = styled(Container)`
     margin-top: 80px;
   }
 `;
+
 function App() {
   return (
     <div className="App">

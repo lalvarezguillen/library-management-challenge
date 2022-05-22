@@ -30,7 +30,6 @@ const BookCreate = () => {
     setSubmitting(false);
   };
 
-
   return (
     <Grid container>
       <Grid item xs={12}>

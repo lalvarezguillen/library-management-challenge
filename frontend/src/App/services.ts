@@ -11,27 +11,27 @@ import {
 } from "./api";
 import { BookWritable } from "./types";
 
-export const queryClient = new QueryClient();
-
 const staleTime = 5 * 60 * 1000;
-const defaultConfig = {
-  staleTime,
-  keepPreviousData: true,
-};
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime,
+      keepPreviousData: true,
+    },
+  },
+});
 
 export const useFetchBooks = (page: number = 1) => {
-  return useQuery(["books", page], () => fetchBooks(page), defaultConfig);
+  return useQuery(["books", page], () => fetchBooks(page));
 };
 
 export const useFetchBook = (id: number) => {
-  return useQuery(["book", id], () => fetchBook(id), defaultConfig);
+  return useQuery(["book", id], () => fetchBook(id));
 };
 
 export const useFetchActivity = (id: number, page: number = 1) => {
-  return useQuery(
-    ["book-activity", id, page],
-    () => fetchBookActivity(id, page),
-    defaultConfig
+  return useQuery(["book-activity", id, page], () =>
+    fetchBookActivity(id, page)
   );
 };
 

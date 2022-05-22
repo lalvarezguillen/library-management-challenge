@@ -16,8 +16,8 @@ const BookSummary = (params: Book) => {
 export default BookSummary;
 
 const StyleContainer = styled(Box)`
-&& {
-  max-width: 100%;
-  word-break: break-word
-}
+  && {
+    max-width: 100%;
+    word-break: break-word;
+  }
 `;
