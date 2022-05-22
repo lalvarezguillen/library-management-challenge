@@ -11,33 +11,16 @@ Library management system
 * Ability to track state changes for a book
 * Report that contains the current state of all books
 
-## Backend
+## Running the project
 
-1. Install dependencies
-```
-pip install -r requirements.txt
-```
+The project requires Docker Compose for running. See https://docs.docker.com/compose/install/
 
-2. Test it
+Run it with
 
 ```
-pytest -v
+docker-compose up
 ```
 
-3. Run it
-```
-python manage.py migrate
-python manage.py runserver
-```
+The frontend can be accessed through `http://localhost:8080`
 
-## Frontend
-
-1. Install dependencies
-```
-npm i
-```
-
-2. Run it
-```
-npm start
-```
+And the API through `http://localhost:8080/api/`

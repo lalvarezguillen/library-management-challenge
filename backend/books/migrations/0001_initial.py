@@ -8,28 +8,53 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Book',
+            name="Book",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('isbn', models.CharField(max_length=13)),
-                ('title', models.CharField(max_length=1024)),
-                ('author', models.CharField(max_length=1024)),
-                ('description', models.CharField(default='', max_length=2048)),
-                ('on_site', models.BooleanField(default=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("isbn", models.CharField(max_length=13)),
+                ("title", models.CharField(max_length=1024)),
+                ("author", models.CharField(max_length=1024)),
+                ("description", models.CharField(default="", max_length=2048)),
+                ("on_site", models.BooleanField(default=True)),
             ],
         ),
         migrations.CreateModel(
-            name='BookActivity',
+            name="BookActivity",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('type', models.PositiveSmallIntegerField(choices=[(0, 'checkout'), (1, 'checkin')])),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('book', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='books.book')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "type",
+                    models.PositiveSmallIntegerField(
+                        choices=[(0, "check-out"), (1, "check-in")]
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "book",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="books.book"
+                    ),
+                ),
             ],
         ),
     ]

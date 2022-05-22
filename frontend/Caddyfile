@@ -1,0 +1,9 @@
+http://localhost
+
+root * /home/app/
+file_server
+
+route /api/* {
+	uri strip_prefix /api
+	reverse_proxy backend:8000
+}
