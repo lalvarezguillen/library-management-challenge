@@ -2,19 +2,16 @@ from django.db import models
 
 
 class Book(models.Model):
-    # TODO: use IsbnField instead
+    # TODO: use ISBNField https://github.com/secnot/django-isbn-field
+    # or add ISBN validation https://en.wikipedia.org/wiki/ISBN#Check_digits
     isbn = models.CharField(max_length=13)
 
-    # https://www.booklistqueen.com/books-with-long-titles
     title = models.CharField(max_length=1024)
 
     # Would be FK ideally
     author = models.CharField(max_length=1024)
 
     description = models.CharField(max_length=2048, default="")
-
-    # created_at = models.DateTimeField(auto_now_add=True)
-    # updated_at = models.DateTimeField(auto_now=True)
 
     on_site = models.BooleanField(default=True)
 
@@ -30,4 +27,5 @@ class BookActivity(models.Model):
     # version if necessary, w/o having to touch schema
     type = models.PositiveSmallIntegerField(choices=TYPE_CHOICES)
 
+    # TODO: timestamp might be a more fitting name
     created_at = models.DateTimeField(auto_now_add=True)

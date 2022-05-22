@@ -1,3 +1,9 @@
+/**
+ * This module adopts the testing recommendations from the author of 
+ * react-query. See
+ * https://github.com/TkDodo/testing-react-query
+ * https://tkdodo.eu/blog/testing-react-query
+ */
 import { render } from "@testing-library/react";
 import { rest } from "msw";
 import * as React from "react";

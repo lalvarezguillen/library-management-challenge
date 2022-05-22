@@ -29,7 +29,7 @@ class BooksViewSet(
     """
 
     serializer_class = BookSerializer
-    queryset = Book.objects.all()
+    queryset = Book.objects.order_by("pk")
 
     @action(detail=True, methods=["POST"], url_path="check-out")
     def check_out(self, request, pk=None):
